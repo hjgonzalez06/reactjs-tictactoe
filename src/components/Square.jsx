@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const Square = ({ value }) => {
-
-    let [innerValue, setInnerValue] = useState(null);
+const Square = ({ value, onClick }) => {
 
     return (
         <>
             <button
                 className="square"
-                onClick={() => setInnerValue(value)}
+                onClick={() => onClick()}
             >
-                {innerValue}
+                {value}
             </button>
         </>
     );
