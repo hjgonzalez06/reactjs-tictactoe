@@ -11,11 +11,30 @@ const Game = () => {
     let [stepNumber, setStepNumber] = useState(0);
     let [xIsNext, setXIsNext] = useState(true);
     const newHistory = history;
-    const currentSquares = newHistory[newHistory.length-1].squares;
-    const gameStatus = getGameStatus(currentSquares, xIsNext);
+    const currentSquares = newHistory[stepNumber].squares;
+    const gameStatus = showGameStatus(currentSquares, xIsNext);
 
+    const getMovesHistory = newHistory.map((step, move) => {
+        const desc = move ?
+            `Go to move #${move}` :
+            'Go to game start';
+
+        return (
+            <>
+                <li key={move}>
+                    <button onClick={() => jumpTo(move)}>{desc}</button>
+                </li>
+            </>
+        );
+    });
+
+    const jumpTo = step => {
+        setStepNumber(step);
+        setXIsNext((step % 2) === 0);
+    }
+    
     const handleClick = i => {
-        const newHistory = history;
+        const newHistory = history.slice(0, stepNumber+1);
         const currentSquares = newHistory[newHistory.length-1].squares;
         const newSquares = currentSquares.slice();
         if(calculateWinner(newSquares) || newSquares[i]) return;
@@ -25,6 +44,7 @@ const Game = () => {
                 squares: newSquares
             }
         ]));
+        setStepNumber(newHistory.length);
         setXIsNext(!xIsNext);
     }
 
@@ -41,9 +61,9 @@ const Game = () => {
                     <div>
                         {gameStatus}
                     </div>
-                    <div>
-                        Moves
-                    </div>
+                    <ol>
+                        {getMovesHistory}
+                    </ol>
                 </div>
             </div>
         </>
@@ -59,7 +79,7 @@ const getNextPlayer = xIsNext => {
     return xIsNext ? 'X' : 'O';
 }
 
-const getGameStatus = (squares, xIsNext) => {
+const showGameStatus = (squares, xIsNext) => {
     let winner = calculateWinner(squares);
 
     return winner ? `Winner: ${getCurrentPlayer(xIsNext)}` : `Next player: ${getNextPlayer(xIsNext)}`;
