@@ -3,18 +3,17 @@ import Board from '../Board';
 
 const Game = () => {
 
-    let [history, setHistory] = useState([
+    const [history, setHistory] = useState([
         {
             squares: Array(9).fill(null)
         }
     ]);
-    let [stepNumber, setStepNumber] = useState(0);
-    let [xIsNext, setXIsNext] = useState(true);
-    const newHistory = history;
-    const currentSquares = newHistory[stepNumber].squares;
+    const [stepNumber, setStepNumber] = useState(0);
+    const [xIsNext, setXIsNext] = useState(true);
+    const currentSquares = history[stepNumber].squares;
     const gameStatus = showGameStatus(currentSquares, xIsNext);
 
-    const getMovesHistory = newHistory.map((step, move) => {
+    const getMovesHistory = history.map((step, move) => {
         const desc = move ?
             `Go to move #${move}` :
             'Go to game start';
