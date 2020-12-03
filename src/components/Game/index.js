@@ -80,8 +80,14 @@ const getNextPlayer = xIsNext => {
 
 const showGameStatus = (squares, xIsNext) => {
     let winner = calculateWinner(squares);
+    let full = isNotEmpty(squares);
 
-    return winner ? `Winner: ${getCurrentPlayer(xIsNext)}` : `Next player: ${getNextPlayer(xIsNext)}`;
+    return winner ? `Winner: ${getCurrentPlayer(xIsNext)}` :
+           full ? `There's a DRAW` : `Next player: ${getNextPlayer(xIsNext)}`;
+}
+
+const isNotEmpty = squares => {
+    return squares.every(square => square != null);
 }
 
 const calculateWinner = squares => {
