@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Board from '../Board';
+import calculateWinner from '../../utils/calculateWinner';
+import showGameStatus, { getNextPlayer } from '../../utils/showGameStatus';
 
 const Game = () => {
 
@@ -68,44 +70,6 @@ const Game = () => {
         </>
     );
 
-};
-
-const getCurrentPlayer = xIsNext => {
-    return xIsNext ? 'O' : 'X';
-}
-
-const getNextPlayer = xIsNext => {
-    return xIsNext ? 'X' : 'O';
-}
-
-const showGameStatus = (squares, xIsNext) => {
-    let winner = calculateWinner(squares);
-    let full = isNotEmpty(squares);
-
-    return winner ? `Winner: ${getCurrentPlayer(xIsNext)}` :
-           full ? `There's a DRAW` : `Next player: ${getNextPlayer(xIsNext)}`;
-}
-
-const isNotEmpty = squares => {
-    return squares.every(square => square != null);
-}
-
-const calculateWinner = squares => {
-    const lines = [
-        [0,1,2],
-        [3,4,5],
-        [6,7,8],
-        [0,3,6],
-        [1,4,7],
-        [2,5,8],
-        [0,4,8],
-        [2,4,6]
-    ]
-
-    return lines.find(line => {
-        const [a, b, c] = line;
-        return (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]);
-    });
 };
 
 export default Game;
