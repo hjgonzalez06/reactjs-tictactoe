@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './styles.css';
 import Board from '../Board';
 import calculateWinner from '../../utils/calculateWinner';
 import showGameStatus, { getNextPlayer } from '../../utils/showGameStatus';
@@ -61,7 +62,7 @@ const Game = () => {
                     />
                 </div>
                 <div className="game-info">
-                    <div>
+                    <div className="status">
                         {gameStatus}
                     </div>
                     <ol>

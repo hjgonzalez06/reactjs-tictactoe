@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles.css';
 import Square from '../Square';
 
 const Board = ({ squares, onClick, winnerLine}) => {
