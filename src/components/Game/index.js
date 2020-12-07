@@ -13,6 +13,7 @@ const Game = () => {
     const [stepNumber, setStepNumber] = useState(0);
     const [xIsNext, setXIsNext] = useState(true);
     const currentSquares = history[stepNumber].squares;
+    const winnerLine = calculateWinner(currentSquares);
     const gameStatus = showGameStatus(currentSquares, xIsNext);
 
     const getMovesHistory = history.map((step, move) => {
@@ -38,7 +39,7 @@ const Game = () => {
         const newHistory = history.slice(0, stepNumber+1);
         const currentSquares = newHistory[newHistory.length-1].squares;
         const newSquares = currentSquares.slice();
-        if(calculateWinner(newSquares) || newSquares[i]) return;
+        if(winnerLine || newSquares[i]) return;
         newSquares[i] = getNextPlayer(xIsNext);
         setHistory(newHistory.concat([
             {
@@ -56,6 +57,7 @@ const Game = () => {
                     <Board 
                         squares={currentSquares}
                         onClick={i => handleClick(i)}
+                        winnerLine={winnerLine}
                     />
                 </div>
                 <div className="game-info">
