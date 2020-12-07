@@ -1,10 +1,11 @@
 import React from 'react';
+import './styles.css';
 
-const Square = ({ value, onClick }) => {
+const Square = ({ value, onClick, winnerSquare }) => {
 
     return (
         <button
-            className="square"
+            className={winnerSquare ? "winner-square" : "square"}
             onClick={onClick}
         >
             {value}
