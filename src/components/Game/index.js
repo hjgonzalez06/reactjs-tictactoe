@@ -16,20 +16,26 @@ const Game = () => {
     const currentSquares = history[stepNumber].squares;
     const winnerLine = calculateWinner(currentSquares);
     const gameStatus = showGameStatus(currentSquares, xIsNext);
+    const [ascSort,setAscSort] = useState(true);
 
     const getMovesHistory = history.map((step, move) => {
-        const desc = move ?
+        const moveText = move ?
             `Go to move #${move}` :
             'Go to game start';
 
         return (
             <>
                 <li key={move}>
-                    <button onClick={() => jumpTo(move)}>{desc}</button>
+                    <button
+                        onClick={() => jumpTo(move)}>
+                        {moveText}
+                    </button>
                 </li>
             </>
         );
     });
+
+    const sortMovesHistory = ascSort ? getMovesHistory : getMovesHistory.reverse();
 
     const jumpTo = step => {
         setStepNumber(step);
@@ -65,9 +71,16 @@ const Game = () => {
                     <div className="status">
                         {gameStatus}
                     </div>
-                    <ol>
-                        {getMovesHistory}
-                    </ol>
+                    <div>
+                        <button
+                            onClick={() => setAscSort(!ascSort)}
+                        >
+                            {ascSort ? 'Sort DESC' : 'Sort ASC'}
+                        </button>
+                        <ol>
+                            {sortMovesHistory}
+                        </ol>
+                    </div>
                 </div>
             </div>
         </>
