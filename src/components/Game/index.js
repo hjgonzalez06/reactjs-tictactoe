@@ -22,11 +22,13 @@ const Game = () => {
         const moveText = move ?
             `Go to move #${move}` :
             'Go to game start';
+        const isSelected = (move === stepNumber);
 
         return (
             <>
                 <li key={move}>
                     <button
+                        className={isSelected ? 'selected-move' : ''}
                         onClick={() => jumpTo(move)}>
                         {moveText}
                     </button>

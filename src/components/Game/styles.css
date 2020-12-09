@@ -10,3 +10,8 @@
 .game-info {
     margin-left: 20px;
 }
+
+.selected-move {
+    font-weight: bolder;
+    border: 1px solid #32DE8A;
+}
