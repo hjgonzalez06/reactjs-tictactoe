@@ -19,8 +19,10 @@ const Game = () => {
     const [ascSort,setAscSort] = useState(true);
 
     const getMovesHistory = history.map((step, move) => {
+        const col = 1 + step.location % 3;
+        const row = 1 + Math.floor(step.location / 3);
         const moveText = move ?
-            `Go to move #${move}` :
+            `Go to move #${move} (${col},${row})` :
             'Go to game start';
         const isSelected = (move === stepNumber);
 
@@ -52,7 +54,8 @@ const Game = () => {
         newSquares[i] = getNextPlayer(xIsNext);
         setHistory(newHistory.concat([
             {
-                squares: newSquares
+                squares: newSquares,
+                location: i
             }
         ]));
         setStepNumber(newHistory.length);
