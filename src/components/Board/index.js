@@ -4,7 +4,7 @@ import Square from '../Square';
 
 const Board = ({ squares, onClick, winnerLine}) => {
 
-    const determineWinnerSquare = (i, winnerLine) => {
+    const isWinnerSquare = (i, winnerLine) => {
         if(!winnerLine) return;
         const [a, b, c] = winnerLine;
         return i === a || i === b || i === c;
@@ -15,7 +15,7 @@ const Board = ({ squares, onClick, winnerLine}) => {
             <Square
                 value={squares[squareIndex]}
                 onClick={() => onClick(squareIndex)}
-                winnerSquare={determineWinnerSquare(squareIndex,winnerLine)}
+                winnerSquare={isWinnerSquare(squareIndex,winnerLine)}
             />
         )
     }
