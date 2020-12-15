@@ -4,8 +4,10 @@ const showGameStatus = (squares, xIsNext) => {
     let winner = calculateWinner(squares);
     let full = isNotEmpty(squares);
 
-    return winner ? `Winner: ${getCurrentPlayer(xIsNext)}` :
-           full ? `There's a DRAW` : `Next player: ${getNextPlayer(xIsNext)}`;
+    if (winner) return `Winner: ${getCurrentPlayer(xIsNext)}`;
+    if (!winner && full) return `There's a DRAW`;
+    
+    return `Next player: ${getNextPlayer(xIsNext)}`;
 };
 
 export default showGameStatus;
