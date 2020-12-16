@@ -1,35 +1,42 @@
 import React from 'react';
+import './styles.css';
 import Square from '../Square';
 
-const Board = ({ squares, onClick}) => {
+const Board = ({ squares, onClick, winnerLine}) => {
 
-    const renderSquare = i => {
-        return <Square
-                    value={squares[i]}
-                    onClick={() => onClick(i)}
-                />
+    const isWinnerSquare = (i, winnerLine) => {
+        if(!winnerLine) return;
+        const [a, b, c] = winnerLine;
+        return i === a || i === b || i === c;
     };
 
-    return (
-        <>
-            <div>
-                <div className="board-row">
-                    {renderSquare(0)}
-                    {renderSquare(1)}
-                    {renderSquare(2)}
-                </div>
-                <div className="board-row">
-                    {renderSquare(3)}
-                    {renderSquare(4)}
-                    {renderSquare(5)}
-                </div>
-                <div className="board-row">
-                    {renderSquare(6)}
-                    {renderSquare(7)}
-                    {renderSquare(8)}
-                </div>
+    const renderSquare = squareIndex => {
+        return (
+            <Square
+                value={squares[squareIndex]}
+                onClick={() => onClick(squareIndex)}
+                winnerSquare={isWinnerSquare(squareIndex,winnerLine)}
+            />
+        )
+    }
+    
+    const renderRows = rowIndex => {
+        const row = [rowIndex,rowIndex+1,rowIndex+2].map(i => renderSquare(i));
+        return (
+            <div
+                key={rowIndex}
+                className="board-row">
+                {row}    
             </div>
-        </>
+        );
+    };
+
+    const board = [0,3,6].map(i => renderRows(i));
+
+    return (
+        <div>
+            {board}
+        </div>
     );
 
 }

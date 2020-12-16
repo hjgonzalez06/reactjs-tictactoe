@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Game from './components/Game';
-import './index.css';
+import './styles.css';
 
 ReactDOM.render(
     <Game />,
