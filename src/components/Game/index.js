@@ -27,7 +27,6 @@ const Game = () => {
         const isSelected = (move === stepNumber);
 
         return (
-            <>
                 <li key={move}>
                     <button
                         className={isSelected ? 'selected-move' : ''}
@@ -35,7 +34,6 @@ const Game = () => {
                         {moveText}
                     </button>
                 </li>
-            </>
         );
     });
 
@@ -63,7 +61,6 @@ const Game = () => {
     }
 
     return (
-        <>
             <div className="game">
                 <div className="game-board">
                     <Board 
@@ -88,9 +85,7 @@ const Game = () => {
                     </div>
                 </div>
             </div>
-        </>
     );
-
 };
 
 export default Game;
