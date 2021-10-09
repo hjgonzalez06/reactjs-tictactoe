@@ -21,5 +21,5 @@ export const getNextPlayer = xIsNext => {
 }
 
 const isNotEmpty = squares => {
-    return squares.every(square => square != null);
+    return squares.every(square => square !== null);
 }
