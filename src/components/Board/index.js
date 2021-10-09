@@ -13,6 +13,7 @@ const Board = ({ squares, onClick, winnerLine}) => {
     const renderSquare = squareIndex => {
         return (
             <Square
+                key={squareIndex}
                 value={squares[squareIndex]}
                 onClick={() => onClick(squareIndex)}
                 winnerSquare={isWinnerSquare(squareIndex,winnerLine)}
