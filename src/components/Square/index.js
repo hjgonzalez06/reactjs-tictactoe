@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles.css';
+import PropTypes from 'prop-types';
 
 const Square = ({ value, onClick, winnerSquare }) => {
 
@@ -12,6 +13,12 @@ const Square = ({ value, onClick, winnerSquare }) => {
         </button>
     );
 
+};
+
+Square.propTypes = {
+    value: PropTypes.number,
+    onClick: PropTypes.func,
+    winnerSquare: PropTypes.func
 };
 
 export default Square;
